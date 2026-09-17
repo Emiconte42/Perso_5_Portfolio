@@ -1,0 +1,434 @@
+/* ============================================
+   PORTFOLIO — STYLE "JOURNAL ÉPURÉ"
+   Palette : papier crème, encre anthracite, bleu nuit
+   ============================================ */
+
+:root {
+  --paper: #f4f1ea;
+  --paper-dark: #ece7db;
+  --ink: #0d3a41;
+  --ink-soft: #506467;
+  --accent: #163f46;
+  --rule: #bdc9c6;
+  --serif: "Lora", Georgia, serif;
+  --body-font: "Lora", Georgia, serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   PAGE DE COUVERTURE + EFFET LIVRE PLEIN ÉCRAN
+   ============================================ */
+
+.cover-body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--paper);
+  margin: 0;
+}
+
+.book-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  perspective: 2400px;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--paper);
+}
+
+.cover-page {
+  z-index: 2;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.95s cubic-bezier(0.65, 0, 0.35, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 0 30px -10px rgba(43, 41, 37, 0.15);
+}
+
+.cover-page::after {
+  content: "";
+  position: absolute;
+  inset: 1.5rem;
+  border: 1px solid var(--rule);
+  pointer-events: none;
+}
+
+.portfolio-page {
+  z-index: 1;
+  overflow: hidden;
+}
+
+.portfolio-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.book-wrapper.is-open .cover-page {
+  transform: rotateY(-150deg);
+  box-shadow: 20px 0 50px -15px rgba(43, 41, 37, 0.4);
+}
+
+.book-wrapper.is-returning .cover-page {
+  animation: return-cover 0.95s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes return-cover {
+  from {
+    transform: rotateY(-150deg);
+  }
+  to {
+    transform: rotateY(0);
+  }
+}
+
+/* Contenu de la couverture */
+
+.cover-content {
+  text-align: center;
+  padding: 3rem 3rem;
+  width: 100%;
+  max-width: 560px;
+}
+
+.kicker {
+  font-family: var(--body-font);
+  font-style: italic;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 1.2rem;
+}
+
+.masthead {
+  display: block;
+  width: 100%;
+  font-family: "Lora", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  letter-spacing: 0.015em;
+  color: var(--ink);
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.rule {
+  width: 60px;
+  height: 2px;
+  background: var(--ink);
+  margin: 1.4rem auto;
+}
+
+.subtitle {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.6rem;
+}
+
+.cover-text {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 2.4rem;
+}
+
+.enter-btn {
+  font-family: var(--body-font);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 0.85rem 2.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.enter-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 0.3rem;
+  transition: transform 0.3s ease;
+}
+
+.enter-btn:hover .arrow {
+  transform: translateX(4px);
+}
+
+.issue-footer {
+  font-family: var(--serif);
+  margin-top: 2.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   PAGE PORTFOLIO
+   ============================================ */
+
+.journal-body {
+  background: var(--paper);
+  min-height: 100vh;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.journal-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 2.5rem;
+}
+
+.portrait-placeholder {
+  float: right;
+  width: 160px;
+  height: 214px;
+  margin: 0 0 1rem 1.5rem;
+  border: 1px dashed var(--rule);
+  background: var(--paper-dark);
+  overflow: hidden;
+}
+
+.portrait-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.masthead-small {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--ink);
+}
+
+.journal-nav {
+  margin-top: 1rem;
+}
+
+.journal-nav a {
+  font-family: var(--body-font);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease;
+}
+
+.journal-nav a:hover {
+  border-color: var(--ink-soft);
+}
+
+.journal-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 3.5rem;
+  border-top: 3px solid var(--ink);
+  padding-top: 2.5rem;
+}
+
+.column-main {
+  border-right: 1px solid var(--rule);
+  padding-right: 3rem;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.5rem;
+}
+
+.section-title--spaced {
+  margin-top: 2.5rem;
+}
+
+.drop-cap::first-letter {
+  font-family: var(--serif);
+  font-size: 3.2rem;
+  font-weight: 700;
+  float: left;
+  line-height: 0.85;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+  color: var(--accent);
+}
+
+.column-main p {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 1.3rem;
+  text-align: justify;
+}
+
+.skills-list {
+  list-style: none;
+}
+
+.skills-list li {
+  padding: 0.7rem 0;
+  border-bottom: 1px dotted var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.skill-name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.skill-desc {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Colonne latérale : projets */
+
+.project-entry {
+  margin-bottom: 1.2rem;
+}
+
+.project-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.project-tags {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.project-link {
+  font-size: 0.85rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+}
+
+.project-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.divider {
+  height: 1px;
+  background: var(--rule);
+  margin: 1.4rem 0;
+}
+
+.contact-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 0.8rem;
+}
+
+.contact-link {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.contact-link:hover {
+  border-color: var(--ink);
+}
+
+.journal-footer {
+  text-align: center;
+  margin-top: 3.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 720px) {
+  .portrait-placeholder {
+    float: none;
+    margin: 1.5rem auto 0;
+  }
+  .journal-grid {
+    grid-template-columns: 1fr;
+  }
+  .column-main {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+  .cover-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .cover-page::after {
+    inset: 1rem;
+  }
+}

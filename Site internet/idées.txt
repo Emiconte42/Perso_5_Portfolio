@@ -1,0 +1,69 @@
+Il faut que le client se projete, avec la réalisation de son site internet sur une page par exemple. 
+
+Les clients que je souhaite attirer: 
+- Restaurants / Cafés
+- Artisans : Boulangerie, Pâtisserie, Coiffeurs, Fleuriste, Barbiers, Peintre, Pharmacie…
+- Indépendants / Freelance : Avocat, Couture, Coach sport, consultant ...
+
+Les services que tu proposes :
+- Création de site internet
+- Refonte de site internet
+- Adapter un site internet en responsive
+- Maintenance et évolution (MAJ, upsell, Optimisation, sécurité…)
+
+Le contenu de la page :
+- Premiere page ENTREE - avec nom prenom et métier
+- Page principale : 
+	- Petite explication sur moi
+	- Mes services
+	- Mes réalisations
+	- Mes tarifs
+	- A propos et contact
+
+La structure visuelle :
+Style Magazine Forbes, L'équipe pour la une / New York Times mais bcp plus épurée pour l'intérieur.
+
+"En revanche, je ne copierais pas directement L’Équipe ou The New York Times. Inspire-toi plutôt de certains principes :
+
+Une page d’entrée très visuelle
+Des titres éditoriaux forts.
+Une hiérarchie claire.
+Des blocs de contenu comme des articles.
+Des images importantes.
+Une mise en page élégante et aérée."
+
+Les couleurs, les polices et les images:
+
+- Fond jaune tres tres pale, version vieux journal
+- Texte noir
+
+Pour éviter un problème de licence, tu peux utiliser :
+Cormorant Garamond pour les grands titres.
+Libre Baskerville pour les titres éditoriaux.
+Source Sans 3 pour les textes et boutons.
+Inter pour une interface plus moderne.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mails :
+
+
+
+Envoie depuis une boite mail pro
+
+Envoie d'un pixel
+

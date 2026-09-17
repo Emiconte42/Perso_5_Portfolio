@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emilie Conte — Développeuse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="cover-body">
+
+<div class="book-wrapper">
+
+  <!-- PAGE DE COUVERTURE (visible au départ) -->
+  <section class="page cover-page" id="coverPage">
+    <div class="cover-content">
+      <p class="kicker">Portfolio</p>
+      <h1 class="masthead">· EMILIE CONTE ·</h1>
+      <div class="rule"></div>
+      <p class="subtitle">Développeuse web en formation</p>
+      <p class="cover-text">
+        Chaque ligne de code est une nouvelle page à écrire. <br>
+        Bienvenue dans mon portfolio : lieux ou je vais vous partager mes projets.
+      </p>
+      <button class="enter-btn" id="enterBtn">
+        Entrer <span class="arrow">→</span>
+      </button>
+      <p class="issue-footer">Boulogne Billancourt, France · Édition 2026</p>
+    </div>
+  </section>
+
+  <!-- PAGE PORTFOLIO (glissée dessous, révélée par la rotation) -->
+  <section class="page portfolio-page">
+    <iframe src="portfolio.html" class="portfolio-frame" title="Portfolio"></iframe>
+  </section>
+
+</div>
+
+<script>
+  const enterBtn = document.getElementById('enterBtn');
+  const wrapper = document.querySelector('.book-wrapper');
+  const isDirectReturn = new URLSearchParams(window.location.search).has('return');
+
+  const playReturnAnimation = () => {
+    if (isDirectReturn) {
+      wrapper.classList.add('is-returning');
+      return;
+    }
+
+    if (sessionStorage.getItem('returningToCover') !== '1') {
+      return;
+    }
+
+    sessionStorage.removeItem('returningToCover');
+    wrapper.classList.add('is-open');
+    void wrapper.offsetWidth;
+    requestAnimationFrame(() => {
+      wrapper.classList.remove('is-open');
+    });
+  };
+
+  playReturnAnimation();
+  window.addEventListener('pageshow', playReturnAnimation);
+
+  enterBtn.addEventListener('click', () => {
+    wrapper.classList.add('is-open');
+    sessionStorage.setItem('returningToCover', '1');
+    setTimeout(() => {
+      window.location.href = 'portfolio.html';
+    }, 950);
+  });
+</script>
+
+</body>
+</html>

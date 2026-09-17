@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Emilie Conte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="journal-body">
+
+<header class="journal-header">
+  <p class="kicker">Portfolio numérique — Vol. 1</p>
+  <h1 class="masthead-small">· EMILIE CONTE ·</h1>
+  <div class="rule"></div>
+  <nav class="journal-nav">
+    <a href="index.html" id="backToCover">← Retour à la couverture</a>
+  </nav>
+</header>
+
+<main class="journal-grid">
+
+  <!-- COLONNE PRINCIPALE : À PROPOS -->
+  <article class="column column-main">
+    <h2 class="section-title">À la une — Qui suis-je</h2>
+    <div class="portrait-placeholder">
+      <img src="portrait.jpg" alt="Portrait d'Emilie Conte">
+    </div>
+    <p class="drop-cap">
+      Développeuse web basée à Boulogne Billancourt, je suis en reconversion professionnelle.
+	  Ex-cheffe de pôle de dessin technique pour la réalisation de restaurant, de cafés, je suis 
+	  actuellement étudiante à l'école 42, je me forme au développement de site internet 
+      avec une attention particulière portée sur la clarté du code et à la sobriété du design.
+      Je suis de nature curieuse et méthodique, j'aborde chaque projet comme un article 
+      à peaufiner : bien structuré, bien écrit, sans fioritures inutiles.
+    </p>
+    <p>
+      Mon parcours est encore jeune, mais ma volonté d'apprendre est constante.
+      Je documente ici mes premiers pas, mes projets d'entraînement et les
+      technologies que j'explore au fil de mes apprentissages.
+    </p>
+    <p>
+      Contactez-moi pour tout projet de site internet, développement ou refonte.
+    </p>
+
+    <h2 class="section-title section-title--spaced">Compétences</h2>
+    <ul class="skills-list">
+      <li><span class="skill-name">HTML &amp; CSS</span><span class="skill-desc">Structuration sémantique, mise en page responsive</span></li>
+      <li><span class="skill-name">JavaScript</span><span class="skill-desc">Interactions de base, manipulation du DOM</span></li>
+      <li><span class="skill-name">Git &amp; GitHub</span><span class="skill-desc">Versioning, gestion de dépôts, collaboration</span></li>
+      <li><span class="skill-name">Outils</span><span class="skill-desc">VS Code, ligne de commande, débogage navigateur</span></li>
+    </ul>
+  </article>
+
+  <!-- COLONNE SECONDAIRE : PROJETS -->
+  <aside class="column column-side">
+    <h2 class="section-title">Chroniques de projets</h2>
+
+    <article class="project-entry">
+      <h3 class="project-title">Projet N° Un</h3>
+      <p class="project-desc">
+        Brève description du projet : le problème résolu, l'objectif
+        poursuivi et ce que ce travail t'a permis d'apprendre.
+      </p>
+      <p class="project-tags">HTML · CSS · JavaScript</p>
+      <a href="#" class="project-link">Voir le dépôt →</a>
+    </article>
+
+    <div class="divider"></div>
+
+    <article class="project-entry">
+      <h3 class="project-title">Projet N° Deux</h3>
+      <p class="project-desc">
+        Brève description du projet : le contexte, les choix techniques
+        et le résultat obtenu.
+      </p>
+      <p class="project-tags">Python · API</p>
+      <a href="#" class="project-link">Voir le dépôt →</a>
+    </article>
+
+    <div class="divider"></div>
+
+    <article class="project-entry">
+      <h3 class="project-title">Projet N° Trois</h3>
+      <p class="project-desc">
+        Brève description du projet à compléter au fil de tes réalisations.
+      </p>
+      <p class="project-tags">CSS · Design</p>
+      <a href="#" class="project-link">Voir le dépôt →</a>
+    </article>
+
+    <h2 class="section-title section-title--spaced">Contact</h2>
+    <p class="contact-text">
+      Pour toute proposition ou question, écrivez à<br>
+      <a href="mailto:emilie.conte@example.com" class="contact-link">emilie.conte@example.com</a>
+    </p>
+    <p class="contact-text">
+      <a href="https://github.com/Emiconte42" class="contact-link" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="#" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </aside>
+
+</main>
+
+<footer class="journal-footer">
+  <p>Émilie Conte — Journal de développement · San Jose, Californie · 2026</p>
+</footer>
+
+<script>
+  const backToCover = document.getElementById('backToCover');
+
+  backToCover.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const previousPage = document.referrer;
+    const cameFromCover = previousPage && new URL(previousPage).pathname.endsWith('/index.html');
+
+    if (cameFromCover) {
+      window.history.back();
+    } else {
+      window.location.href = 'index.html?return=1';
+    }
+  });
+</script>
+
+</body>
+</html>
