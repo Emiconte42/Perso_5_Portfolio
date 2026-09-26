@@ -275,11 +275,14 @@ body {
 
 /* Fond, hauteur et marges de la page */
 .corps-portfolio {
+  --largeur-panneau: min(58vw, 760px);
+  --largeur-gauche-ouverte: min(800px, calc(100vw - var(--largeur-panneau) - 6rem));
   position: relative;
   background: var(--paper);
   height: auto;
   min-height: 100vh;
   padding: 3rem 3rem 2rem;
+  overflow-x: hidden;
 }
 
 /* En-tête et navigation */
@@ -289,6 +292,7 @@ body {
   text-align: center;
   max-width: 900px;
   margin: 0 auto 2.5rem;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .petit-titre {
@@ -318,13 +322,14 @@ body {
 
 /* Organisation des deux colonnes */
 .grille-portfolio {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: 3.5rem;
   border-top: 3px solid var(--ink);
   padding-top: 2.5rem;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 /* Séparateur de la colonne principale */
@@ -398,7 +403,28 @@ body {
 /* Colonne latérale : projets */
 
 .projet {
+  position: relative;
   margin-bottom: 1.2rem;
+}
+
+/* Tampon indiquant un projet non terminé */
+.tampon-projet {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  padding: 0.25rem 0.7rem;
+  border: 2px solid #9b3b36;
+  color: #9b3b36;
+  font-family: var(--body-font);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  opacity: 0.78;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 .titre-projet {
@@ -424,6 +450,13 @@ body {
   margin-bottom: 0.4rem;
 }
 
+.statut-projet {
+  margin-bottom: 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-style: italic;
+}
+
 .lien-projet {
   font-size: 0.85rem;
   color: var(--ink);
@@ -434,6 +467,81 @@ body {
 .lien-projet:hover {
   color: var(--accent);
   border-color: var(--accent);
+}
+
+/* Panneau de détail affiché à droite */
+.panneau-projet {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  width: var(--largeur-panneau);
+  min-height: 100vh;
+  padding: 3rem clamp(1.5rem, 5vw, 4rem);
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  box-shadow: -12px 0 30px -25px rgba(43, 41, 37, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.projet-ouvert .en-tete-portfolio,
+.projet-ouvert .grille-portfolio {
+  width: var(--largeur-gauche-ouverte);
+  max-width: none;
+  margin-left: calc((100vw - var(--largeur-panneau) - 6rem - var(--largeur-gauche-ouverte)) / 2);
+  margin-right: 0;
+  transform: none;
+}
+
+.projet-ouvert .grille-portfolio {
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+}
+
+.projet-ouvert .pied-portfolio {
+  width: var(--largeur-gauche-ouverte);
+  margin-left: calc((100vw - var(--largeur-panneau) - 6rem - var(--largeur-gauche-ouverte)) / 2);
+  margin-right: 0;
+  transform: none;
+}
+
+.projet-ouvert .panneau-projet {
+  transform: translateX(0);
+}
+
+.fermer-projet {
+  margin-bottom: 4rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font: italic 0.85rem var(--body-font);
+  cursor: pointer;
+}
+
+.fermer-projet:hover {
+  color: var(--ink);
+}
+
+.titre-projet-detail {
+  margin-bottom: 0.6rem;
+  font: 600 1.8rem var(--serif);
+  color: var(--ink);
+}
+
+.statut-projet-detail,
+.technologies-projet-detail {
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.description-projet-detail {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
 /* Séparateurs entre les projets */
@@ -488,6 +596,19 @@ body {
   }
   .contenu-couverture {
     padding: 2rem 1.5rem;
+  }
+
+  .panneau-projet {
+    width: 100%;
+  }
+
+  .projet-ouvert .en-tete-portfolio,
+  .projet-ouvert .grille-portfolio {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    transform: translateX(-100%);
   }
 
 }

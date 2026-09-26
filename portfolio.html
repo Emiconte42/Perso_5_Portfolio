@@ -39,53 +39,57 @@
     <h2 class="titre-section titre-section--espaced">Compétences</h2>
     <ul class="liste-competences">
       <li><span class="nom-competence">HTML &amp; CSS</span><span class="description-competence">Structuration sémantique, mise en page responsive</span></li>
-      <li><span class="nom-competence">JavaScript</span><span class="description-competence">Interactions de base, manipulation du DOM</span></li>
-      <li><span class="nom-competence">Git &amp; GitHub</span><span class="description-competence">Versioning, gestion de dépôts, collaboration</span></li>
-      <li><span class="nom-competence">Outils</span><span class="description-competence">VS Code, ligne de commande, débogage navigateur</span></li>
+      <li><span class="nom-competence">C / C++</span><span class="description-competence">Programmation, algorithmique, gestion de la mémoire</span></li>
+      <li><span class="nom-competence">Développement web</span><span class="description-competence">Création de sites vitrines, intégration responsive</span></li>
+      <li><span class="nom-competence">Outils</span><span class="description-competence">VS Code, ligne de commande, débogage, Makefile</span></li>
     </ul>
   </article>
 
   <!-- COLONNE SECONDAIRE : PROJETS -->
   <aside class="colonne colonne-secondaire">
-    <h2 class="titre-section">Chroniques de projets</h2>
+    <h2 class="titre-section">Carnet de réalisations</h2>
 
     <article class="projet">
-      <h3 class="titre-projet">Projet N° Un</h3>
+      <span class="tampon-projet" aria-hidden="true">En cours</span>
+      <h3 class="titre-projet">Projet N°1 · Site vitrine personnel</h3>
       <p class="description-projet">
-        Brève description du projet : le problème résolu, l'objectif
-        poursuivi et ce que ce travail t'a permis d'apprendre.
+        Un premier projet pour travailler la structure d'une page,
+        la mise en forme et l'adaptation aux différentes tailles d'écran.
       </p>
-      <p class="technologies-projet">HTML · CSS · JavaScript</p>
-      <a href="#" class="lien-projet">Voir le dépôt →</a>
+      <p class="technologies-projet">HTML · CSS</p>
+      <p class="statut-projet">2026 · Projet personnel · En cours</p>
+      <a href="#" class="lien-projet" data-projet="1">Voir le projet →</a>
     </article>
 
     <div class="separateur"></div>
 
     <article class="projet">
-      <h3 class="titre-projet">Projet N° Deux</h3>
+      <span class="tampon-projet" aria-hidden="true">En cours</span>
+      <h3 class="titre-projet">Projet N°2</h3>
       <p class="description-projet">
         Brève description du projet : le contexte, les choix techniques
         et le résultat obtenu.
       </p>
       <p class="technologies-projet">Python · API</p>
-      <a href="#" class="lien-projet">Voir le dépôt →</a>
+      <a href="#" class="lien-projet" data-projet="2">Voir le projet →</a>
     </article>
 
     <div class="separateur"></div>
 
     <article class="projet">
-      <h3 class="titre-projet">Projet N° Trois</h3>
+      <span class="tampon-projet" aria-hidden="true">En cours</span>
+      <h3 class="titre-projet">Projet N°3</h3>
       <p class="description-projet">
         Brève description du projet à compléter au fil de tes réalisations.
       </p>
       <p class="technologies-projet">CSS · Design</p>
-      <a href="#" class="lien-projet">Voir le dépôt →</a>
+      <a href="#" class="lien-projet" data-projet="3">Voir le projet →</a>
     </article>
 
     <h2 class="titre-section titre-section--espaced">Contact</h2>
     <p class="texte-contact">
       Pour toute proposition ou question, écrivez à<br>
-      <a href="mailto:emilie.conte@example.com" class="lien-contact">emilie.conte@example.com</a>
+      <a href="mailto:emilieconte.pro@gmail.com" class="lien-contact">emilieconte.pro@gmail.com</a>
     </p>
     <p class="texte-contact">
       <a href="https://github.com/Emiconte42" class="lien-contact" target="_blank" rel="noopener">GitHub</a>
@@ -100,8 +104,93 @@
   <p>Émilie Conte — Journal de développement · San Jose, Californie · 2026</p>
 </footer>
 
+<aside class="panneau-projet" aria-hidden="true">
+  <button class="fermer-projet" type="button">← Retour aux projets</button>
+  <p class="surtitre">Fiche de projet</p>
+  <h2 class="titre-projet-detail"></h2>
+  <p class="statut-projet-detail"></p>
+  <div class="trait"></div>
+  <p class="description-projet-detail"></p>
+  <p class="technologies-projet-detail"></p>
+</aside>
+
 <script>
   const backToCover = document.getElementById('backToCover');
+  const corpsPortfolio = document.querySelector('.corps-portfolio');
+  const liensProjet = document.querySelectorAll('.lien-projet');
+  const panneauProjet = document.querySelector('.panneau-projet');
+  const fermerProjet = document.querySelector('.fermer-projet');
+  const titreProjetDetail = document.querySelector('.titre-projet-detail');
+  const statutProjetDetail = document.querySelector('.statut-projet-detail');
+  const descriptionProjetDetail = document.querySelector('.description-projet-detail');
+  const technologiesProjetDetail = document.querySelector('.technologies-projet-detail');
+  let projetActif = null;
+
+  const projets = {
+    1: {
+      titre: 'Projet N°1 · Site vitrine personnel',
+      statut: '2026 · Projet personnel · En cours',
+      description: 'Un premier projet pour travailler la structure d’une page, la mise en forme et l’adaptation aux différentes tailles d’écran.',
+      technologies: 'HTML · CSS'
+    },
+    2: {
+      titre: 'Projet N°2',
+      statut: 'Projet d’apprentissage · En préparation',
+      description: 'Un projet consacré à la découverte de la programmation et à la construction d’une logique solide, étape par étape.',
+      technologies: 'C · C++ · Algorithmique'
+    },
+    3: {
+      titre: 'Projet N°3',
+      statut: 'Projet à venir',
+      description: 'Un nouvel espace pour présenter une réalisation future, ses choix techniques et ce que j’aurai appris en la construisant.',
+      technologies: 'À compléter'
+    }
+  };
+
+  const afficherProjet = (numeroProjet) => {
+    const projet = projets[numeroProjet];
+
+    if (!projet) {
+      return;
+    }
+
+    titreProjetDetail.textContent = projet.titre;
+    statutProjetDetail.textContent = projet.statut;
+    descriptionProjetDetail.textContent = projet.description;
+    technologiesProjetDetail.textContent = projet.technologies;
+    corpsPortfolio.classList.add('projet-ouvert');
+    panneauProjet.setAttribute('aria-hidden', 'false');
+    liensProjet.forEach((lienProjet) => {
+      const estActif = lienProjet.dataset.projet === numeroProjet;
+      lienProjet.textContent = estActif ? 'Fermer le projet ←' : 'Voir le projet →';
+      lienProjet.classList.toggle('projet-actif', estActif);
+    });
+    projetActif = numeroProjet;
+  };
+
+  const fermerPanneauProjet = () => {
+    corpsPortfolio.classList.remove('projet-ouvert');
+    panneauProjet.setAttribute('aria-hidden', 'true');
+    liensProjet.forEach((lienProjet) => {
+      lienProjet.textContent = 'Voir le projet →';
+      lienProjet.classList.remove('projet-actif');
+    });
+    projetActif = null;
+  };
+
+  liensProjet.forEach((lienProjet) => {
+    lienProjet.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (projetActif === lienProjet.dataset.projet) {
+        fermerPanneauProjet();
+        return;
+      }
+
+      afficherProjet(lienProjet.dataset.projet);
+    });
+  });
+
+  fermerProjet.addEventListener('click', fermerPanneauProjet);
 
   backToCover.addEventListener('click', (event) => {
     event.preventDefault();
