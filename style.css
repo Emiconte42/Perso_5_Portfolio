@@ -14,6 +14,7 @@
   --body-font: "Lora", Georgia, serif;
 }
 
+/* Réinitialisation et réglages communs */
 * {
   margin: 0;
   padding: 0;
@@ -24,6 +25,7 @@ html, body {
   height: 100%;
 }
 
+/* Apparence générale des pages */
 body {
   background: var(--paper);
   color: var(--ink);
@@ -35,7 +37,7 @@ body {
    PAGE DE COUVERTURE + EFFET LIVRE PLEIN ÉCRAN
    ============================================ */
 
-.cover-body {
+.corps-couverture {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -43,13 +45,15 @@ body {
   margin: 0;
 }
 
-.book-wrapper {
+/* Conteneur de l'animation d'ouverture */
+.livre {
   position: relative;
   width: 100vw;
   height: 100vh;
   perspective: 2400px;
 }
 
+/* Une page occupe toute la fenêtre */
 .page {
   position: absolute;
   inset: 0;
@@ -58,10 +62,12 @@ body {
   background: var(--paper);
 }
 
-.cover-page {
+/* Mise en place de la couverture */
+.page-couverture {
   z-index: 2;
   transform-origin: left center;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
   transition: transform 0.95s cubic-bezier(0.65, 0, 0.35, 1);
   display: flex;
   align-items: center;
@@ -69,32 +75,27 @@ body {
   box-shadow: 4px 0 30px -10px rgba(43, 41, 37, 0.15);
 }
 
-.cover-page::after {
-  content: "";
-  position: absolute;
-  inset: 1.5rem;
-  border: 1px solid var(--rule);
-  pointer-events: none;
-}
-
-.portfolio-page {
+/* Page portfolio affichée sous la couverture */
+.page-portfolio {
   z-index: 1;
   overflow: hidden;
 }
 
-.portfolio-frame {
+/* Cadre technique de la page portfolio */
+.cadre-portfolio {
   width: 100%;
   height: 100%;
   border: none;
   display: block;
 }
 
-.book-wrapper.is-open .cover-page {
+/* Animation d'ouverture et de retour */
+.livre.est-ouvert .page-couverture {
   transform: rotateY(-150deg);
   box-shadow: 20px 0 50px -15px rgba(43, 41, 37, 0.4);
 }
 
-.book-wrapper.is-returning .cover-page {
+.livre.est-retour .page-couverture {
   animation: return-cover 0.95s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
@@ -107,26 +108,36 @@ body {
   }
 }
 
-/* Contenu de la couverture */
+/* Contenu et typographie de la couverture */
 
-.cover-content {
+.contenu-couverture {
   text-align: center;
   padding: 3rem 3rem;
   width: 100%;
-  max-width: 560px;
+  max-width: 7000px;
 }
 
-.kicker {
+.surtitre {
   font-family: var(--body-font);
   font-style: italic;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
-.masthead {
+/* Surtitre calligraphique du portfolio */
+.surtitre-portfolio {
+  font-family: "Ballet", cursive;
+  font-size: 1.7rem;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Nom affiché en titre principal */
+.titre-principal {
   display: block;
   width: 100%;
   font-family: "Lora", Georgia, serif;
@@ -139,30 +150,45 @@ body {
   white-space: nowrap;
 }
 
-.rule {
+/* Petit trait décoratif */
+.trait {
   width: 60px;
   height: 2px;
   background: var(--ink);
-  margin: 1.4rem auto;
+  margin: 1.7rem auto;
 }
 
-.subtitle {
+.trait-accroche {
+  display: block;
+  margin: 0.8rem auto;
+}
+
+.sous-titre {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: normal;
   font-weight: 500;
   font-size: 1.05rem;
   color: var(--ink-soft);
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.9rem;
 }
 
-.cover-text {
+/* Sous-titre calligraphique de la couverture */
+.sous-titre-couverture {
+  font-family: "Ballet", cursive;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.texte-couverture {
   font-size: 0.98rem;
-  line-height: 1.75;
+  line-height: 1.9;
   color: var(--ink-soft);
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.8rem;
 }
 
-.enter-btn {
+.bouton-entree {
+  display: inline-block;
   font-family: var(--body-font);
   font-size: 0.95rem;
   letter-spacing: 0.06em;
@@ -172,25 +198,69 @@ body {
   color: var(--ink);
   padding: 0.85rem 2.2rem;
   cursor: pointer;
+  margin-top: 0.3rem;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.enter-btn:hover {
+/* État au survol du bouton */
+.bouton-entree:hover {
   background: var(--ink);
   color: var(--paper);
 }
 
-.arrow {
+.fleche {
   display: inline-block;
   margin-left: 0.3rem;
   transition: transform 0.3s ease;
 }
 
-.enter-btn:hover .arrow {
+.bouton-entree:hover .fleche {
   transform: translateX(4px);
 }
 
-.issue-footer {
+/* Liens sociaux de la couverture */
+.reseaux-couverture {
+  margin-top: 2.5rem;
+}
+
+.titre-reseaux {
+  margin-bottom: 0.7rem;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.liens-reseaux {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.lien-reseau {
+  display: grid;
+  width: 2.2rem;
+  height: 2.2rem;
+  place-items: center;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.lien-reseau:hover,
+.lien-reseau:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-3px);
+}
+
+.lien-reseau svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.pied-couverture {
   font-family: var(--serif);
   margin-top: 2.6rem;
   font-size: 0.75rem;
@@ -200,50 +270,39 @@ body {
 }
 
 /* ============================================
-   PAGE PORTFOLIO
-   ============================================ */
+  PAGE PORTFOLIO
+  ============================================ */
 
-.journal-body {
+/* Fond, hauteur et marges de la page */
+.corps-portfolio {
+  position: relative;
   background: var(--paper);
+  height: auto;
   min-height: 100vh;
-  padding: 3rem 1.5rem 4rem;
+  padding: 3rem 3rem 2rem;
 }
 
-.journal-header {
+/* En-tête et navigation */
+.en-tete-portfolio {
+  position: relative;
+  z-index: 1;
   text-align: center;
   max-width: 900px;
   margin: 0 auto 2.5rem;
 }
 
-.portrait-placeholder {
-  float: right;
-  width: 160px;
-  height: 214px;
-  margin: 0 0 1rem 1.5rem;
-  border: 1px dashed var(--rule);
-  background: var(--paper-dark);
-  overflow: hidden;
-}
-
-.portrait-placeholder img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.masthead-small {
+.petit-titre {
   font-family: var(--serif);
   font-weight: 700;
   font-size: clamp(1.8rem, 4vw, 2.4rem);
   color: var(--ink);
 }
 
-.journal-nav {
+.navigation-portfolio {
   margin-top: 1rem;
 }
 
-.journal-nav a {
+.navigation-portfolio a {
   font-family: var(--body-font);
   font-style: italic;
   font-size: 0.85rem;
@@ -253,12 +312,13 @@ body {
   transition: border-color 0.25s ease;
 }
 
-.journal-nav a:hover {
+.navigation-portfolio a:hover {
   border-color: var(--ink-soft);
 }
 
-.journal-grid {
-  max-width: 1000px;
+/* Organisation des deux colonnes */
+.grille-portfolio {
+  max-width: 800px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.6fr 1fr;
@@ -267,12 +327,14 @@ body {
   padding-top: 2.5rem;
 }
 
-.column-main {
+/* Séparateur de la colonne principale */
+.colonne-principale {
   border-right: 1px solid var(--rule);
   padding-right: 3rem;
 }
 
-.section-title {
+/* Titres des rubriques */
+.titre-section {
   font-family: var(--serif);
   font-weight: 600;
   font-size: 1.15rem;
@@ -284,11 +346,11 @@ body {
   padding-bottom: 0.5rem;
 }
 
-.section-title--spaced {
+.titre-section--espaced {
   margin-top: 2.5rem;
 }
 
-.drop-cap::first-letter {
+.lettrine::first-letter {
   font-family: var(--serif);
   font-size: 3.2rem;
   font-weight: 700;
@@ -299,7 +361,7 @@ body {
   color: var(--accent);
 }
 
-.column-main p {
+.colonne-principale p {
   font-size: 0.98rem;
   line-height: 1.85;
   color: var(--ink-soft);
@@ -307,11 +369,12 @@ body {
   text-align: justify;
 }
 
-.skills-list {
+/* Liste des compétences */
+.liste-competences {
   list-style: none;
 }
 
-.skills-list li {
+.liste-competences li {
   padding: 0.7rem 0;
   border-bottom: 1px dotted var(--rule);
   display: flex;
@@ -319,14 +382,14 @@ body {
   gap: 0.15rem;
 }
 
-.skill-name {
+.nom-competence {
   font-family: var(--serif);
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--ink);
 }
 
-.skill-desc {
+.description-competence {
   font-size: 0.85rem;
   color: var(--ink-soft);
   font-style: italic;
@@ -334,11 +397,11 @@ body {
 
 /* Colonne latérale : projets */
 
-.project-entry {
+.projet {
   margin-bottom: 1.2rem;
 }
 
-.project-title {
+.titre-projet {
   font-family: var(--serif);
   font-weight: 600;
   font-size: 1.05rem;
@@ -346,14 +409,14 @@ body {
   margin-bottom: 0.4rem;
 }
 
-.project-desc {
+.description-projet {
   font-size: 0.88rem;
   line-height: 1.6;
   color: var(--ink-soft);
   margin-bottom: 0.5rem;
 }
 
-.project-tags {
+.technologies-projet {
   font-size: 0.75rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -361,42 +424,45 @@ body {
   margin-bottom: 0.4rem;
 }
 
-.project-link {
+.lien-projet {
   font-size: 0.85rem;
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid var(--ink);
 }
 
-.project-link:hover {
+.lien-projet:hover {
   color: var(--accent);
   border-color: var(--accent);
 }
 
-.divider {
+/* Séparateurs entre les projets */
+.separateur {
   height: 1px;
   background: var(--rule);
   margin: 1.4rem 0;
 }
 
-.contact-text {
+/* Coordonnées et liens de contact */
+.texte-contact {
   font-size: 0.9rem;
   line-height: 1.7;
   color: var(--ink-soft);
   margin-bottom: 0.8rem;
 }
 
-.contact-link {
+.lien-contact {
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid var(--rule);
 }
 
-.contact-link:hover {
+.lien-contact:hover {
   border-color: var(--ink);
 }
 
-.journal-footer {
+/* Texte placé sous le contenu */
+.pied-portfolio {
   text-align: center;
   margin-top: 3.5rem;
   font-size: 0.75rem;
@@ -410,25 +476,18 @@ body {
    ============================================ */
 
 @media (max-width: 720px) {
-  .portrait-placeholder {
-    float: none;
-    margin: 1.5rem auto 0;
-  }
-  .journal-grid {
+  .grille-portfolio {
     grid-template-columns: 1fr;
   }
-  .column-main {
+  .colonne-principale {
     border-right: none;
     padding-right: 0;
     border-bottom: 1px solid var(--rule);
     padding-bottom: 2rem;
     margin-bottom: 1rem;
   }
-  .cover-content {
+  .contenu-couverture {
     padding: 2rem 1.5rem;
   }
 
-  .cover-page::after {
-    inset: 1rem;
-  }
 }
